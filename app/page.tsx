@@ -1,6 +1,6 @@
-import Sparkle from "@/components/shared/Sparkle";
+import Footer from "@/components/shared/Footer";
+import NavBar from "@/components/shared/NavBar";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 
 const LightningIcon = () => {
@@ -35,37 +35,41 @@ const LightningIcon = () => {
 
 export default function Home() {
   return (
-    <section className="relative container w-full h-screen mx-auto">
-      <div className="absolute inset-0 mx-auto sm:mx-16 px-6 flex flex-row items-start gap-12">
-        <div className="">
-          <h6 className="font-mono flex text-[#757575] lg:mt-12 mt-4">
-            <LightningIcon /> Save Time
-          </h6>
-          <h1 className="font-mono font-black text-primary max-w-4xl lg:text-[50px] sm:text-[40px] xs:text-[30px] text-[25px] lg:leading-[85px]">
-            Transform Your Videos with{" "}
-            <span className="bg-gradient-to-r from-[#9085ff] via-[#b169ff] to-[#8345ff] text-transparent bg-clip-text">
-              Perfect Subtitles in Seconds!
-            </span>
-          </h1>
-          <p className="font-mono max-w-2xl mt-5 xs:tracking-tighter tracking-wider lg:text-xl md:text-lg sm:text-sm text-xs">
-            Automatically generate precise and synchronized subtitles for any
-            video. Enhance accessibility, boost engagement, and reach a global
-            audience effortlessly with our cutting-edge AI-powered subtitle
-            generator.
-          </p>
-          <Button
-            className="rounded-lg lg:mt-16 md:mt-12 mt-10"
-            variant="default"
-          >
-            <p className="max-w-3xl">
-              <Link href="/signup">Get Started...</Link>
+    <>
+      <NavBar />
+      <section className="relative container w-full h-screen mx-auto">
+        <div className="absolute inset-0 mx-auto sm:mx-16 px-6 flex flex-row items-start gap-12">
+          <div className="">
+            <h6 className="font-mono flex text-[#757575] lg:mt-12 mt-4">
+              <LightningIcon /> Save Time
+            </h6>
+            <h1 className="font-mono font-black text-primary max-w-4xl lg:text-[50px] sm:text-[40px] xs:text-[30px] text-[25px] lg:leading-[85px]">
+              Transform Your Videos with{" "}
+              <span className="bg-gradient-to-r from-[#9085ff] via-[#b169ff] to-[#8345ff] text-transparent bg-clip-text">
+                Perfect Subtitles in Seconds!
+              </span>
+            </h1>
+            <p className="font-mono max-w-2xl mt-5 xs:tracking-tighter tracking-wider lg:text-xl md:text-lg sm:text-sm text-xs">
+              Automatically generate precise and synchronized subtitles for any
+              video. Enhance accessibility, boost engagement, and reach a global
+              audience effortlessly with our cutting-edge AI-powered subtitle
+              generator.
             </p>
-          </Button>
-          <p className="font-mono max-w-2xl tracking-tighter mt-2">
-            The best application to sparkle up your videos.
-          </p>
+            <Button
+              className="rounded-lg lg:mt-16 md:mt-12 mt-10"
+              variant="default"
+            >
+              <p className="max-w-3xl">
+                <Link href="/signup">Get Started...</Link>
+              </p>
+            </Button>
+            <p className="font-mono max-w-2xl tracking-tighter mt-2">
+              The best application to sparkle up your videos.
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </>
   );
 }
