@@ -2,6 +2,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
+import Providers from "./Providers";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -18,7 +19,9 @@ export default function RootLayout({ children, }: Readonly<{children: React.Reac
   return (
     <html lang="en">
       <body className={poppins.variable}>
+        <Providers>
         {children}
+        </Providers>
       </body>
     </html>
   );

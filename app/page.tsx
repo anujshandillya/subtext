@@ -1,6 +1,8 @@
+"use client";
 import Footer from "@/components/shared/Footer";
 import NavBar from "@/components/shared/NavBar";
 import { Button } from "@/components/ui/button";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const LightningIcon = () => {
@@ -34,6 +36,7 @@ const LightningIcon = () => {
 };
 
 export default function Home() {
+  const session = useSession();
   return (
     <>
       <NavBar />
@@ -55,14 +58,29 @@ export default function Home() {
               audience effortlessly with our cutting-edge AI-powered subtitle
               generator.
             </p>
-            <Button
-              className="rounded-lg lg:mt-16 md:mt-12 mt-10"
-              variant="default"
-            >
-              <p className="max-w-3xl">
-                <Link href="/signup">Get Started...</Link>
-              </p>
-            </Button>
+            {session.data?.user && (
+              <>
+                <Button
+                  className="rounded-lg lg:mt-16 md:mt-12 mt-10"
+                  variant="default"
+                >
+                  <p className="max-w-3xl">
+                    <Link href="/dashboard">Dashboard</Link>
+                  </p>
+                </Button>
+              </>
+            )}
+            {!session.data?.user && (
+              <>
+                <Button
+                  className="rounded-lg lg:mt-16 md:mt-12 mt-10"
+                  variant="default"
+                  onClick={() => signIn()}
+                >
+                  <p className="max-w-3xl">Get Started...</p>
+                </Button>
+              </>
+            )}
             <p className="font-mono max-w-2xl tracking-tighter mt-2">
               The best application to sparkle up your videos.
             </p>
