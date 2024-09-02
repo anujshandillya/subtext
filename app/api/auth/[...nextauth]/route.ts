@@ -25,23 +25,23 @@ const handler = NextAuth({
         });
         if(!userExists) {
           const token = await bcryptjs.hash(user.email!, 10);
-          const verifyToken = token+user.email!;
+          const verifyToken = token;
           const newUser = await client.user.create({
             data: {
               email: user.email!,
               name: user.name!,
               username: user.email!.split('@')[0], 
               password: token, 
-              // verifyEmailToken: verifyToken,
-              // verifyEmailTokenExpiry: new Date(Date.now() + 1000 * 60 * 60 * 24),
+              verifyEmailToken: verifyToken,
+              verifyEmailTokenExpiry: new Date(Date.now() + 1000 * 60 * 60 * 24),
             },
           })
         }else {
           console.log({
             "message": "User already exists",
           })
-          return true;
         }
+        // update user context
       } catch (error) {
         console.error(error);
       }

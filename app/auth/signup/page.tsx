@@ -16,6 +16,8 @@ import FcGoogle from "@/components/shared/GoogleIcon"
 import { signIn } from "next-auth/react"
 import * as z from "zod"
 import Link from "next/link"
+import axios from "axios"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -29,6 +31,7 @@ const formSchema = z.object({
 })
 
 export default function page() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,13 +48,14 @@ export default function page() {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       formSchema.parse(formData);
-      // const response = await fetch('/api/auth/v1/signup', {})
+      const response = await axios.post('/api/auth/v1/signup',formData);
+      console.log(response);
+      router.push(`/auth/login`);
       // console.log(formData);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -61,7 +65,6 @@ export default function page() {
       }
     }
 
-    // Reset form
     setFormData({
       name: "",
       email: "",
