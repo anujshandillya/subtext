@@ -31,12 +31,13 @@ export default function NavBar() {
           )}
           {!session.data?.user && (
             <>
+            <Link href="/auth/login">
               <Button
                 className="bg-white hover:bg-green-300 text-black"
-                onClick={() => signIn()}
               >
                 Login
               </Button>
+            </Link>
             </>
           )}
         </nav>

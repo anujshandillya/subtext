@@ -21,6 +21,10 @@ export default function page() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
+        <div className="flex justify-around items-center">
+        <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>signIn()}><FcGoogle/></Button>
+        </div>
+        <span className="flex m-4 justify-around items-center">OR</span>
       </CardHeader>
       <CardContent>
         <form>
