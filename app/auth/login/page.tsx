@@ -1,5 +1,6 @@
 "use client"
 import {
+  useEffect,
   useState
 } from "react"
 import { Button } from "@/components/ui/button"
@@ -12,11 +13,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import FcGoogle from "@/components/shared/GoogleIcon"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import * as z from "zod"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import { setLogin } from "@/state"
+import { useDispatch, useSelector } from "react-redux"
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -29,7 +32,19 @@ export default function page() {
     email: "",
     password: "",
   });
-
+  const dispatch = useDispatch();
+  const session = useSession();
+  const { user } = useSelector((state: any) => state);
+  console.log(user);
+  if(user) {
+    router.replace('/dashboard');
+  }
+  useEffect(() => {
+    dispatch(setLogin({
+      user: session?.data?.user,
+      token: session.data?.user?.email
+    }))
+  },[session]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -64,7 +79,15 @@ export default function page() {
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
         <div className="flex justify-around items-center">
-        <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>signIn()}><FcGoogle/></Button>
+        <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>{
+          signIn();
+          // set redux state
+          // dispatch(setLogin({
+          //   email: session.data!.user!.email,
+          //   name: session.data!.user!.name,
+          //   auth: session!.status==="authenticated"?true:false,
+          // }))
+        }}><FcGoogle/></Button>
         </div>
         <span className="flex m-4 justify-around items-center">OR</span>
       </CardHeader>

@@ -1,5 +1,6 @@
 "use client"
 import {
+  useEffect,
   useState
 } from "react"
 
@@ -13,11 +14,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import FcGoogle from "@/components/shared/GoogleIcon"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import * as z from "zod"
 import Link from "next/link"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { useDispatch, useSelector } from "react-redux"
+import { setLogin } from "@/state"
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -32,6 +35,7 @@ const formSchema = z.object({
 
 export default function page() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,6 +43,17 @@ export default function page() {
     password: "",
     confirmPassword: "",
   });
+  const session = useSession();
+  const { user } = useSelector((state: any) => state);
+  if(user) {
+    router.replace('/dashboard');
+  }
+  useEffect(() => {
+    dispatch(setLogin({
+      user: session?.data?.user,
+      token: session.data?.user?.email
+    }))
+  },[session]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -81,7 +96,15 @@ export default function page() {
       <CardHeader>
         <CardTitle>Signup for an account</CardTitle>
         <div className="flex justify-around items-center">
-        <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>signIn()}><FcGoogle/></Button>
+        <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>{
+          signIn();
+          // set redux state
+          // dispatch(setLogin({
+          //   email: session.data!.user!.email,
+          //   name: session.data!.user!.name,
+          //   auth: session!.status==="authenticated"?true:false,
+          // }))
+        }}><FcGoogle/></Button>
         </div>
         <span className="flex m-4 justify-around items-center">OR</span>
       </CardHeader>
