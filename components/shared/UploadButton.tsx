@@ -7,12 +7,12 @@ function BsUpload(props: {}) {
 }
 
 export default function UploadButton() {
-    const upload = (e:any) => {
+    const upload = async (e:any) => {
         e.preventDefault();
         const files=e.target.files;
         if(files.length>0) {
             const file=files[0];
-            const res=axios.postForm('/api/gen/video/upload',{
+            const res=await axios.postForm('/api/gen/video/upload',{
                 file,
             });
             console.log(res);
