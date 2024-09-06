@@ -48,12 +48,12 @@ const store = configureStore({
 
 export default function Providers({ children }: Readonly<{children: React.ReactNode}>) {
   return (
-    // <Provider store={store}>
-      // {/* <PersistGate persistor={persistStore(store)}> */}
+    <Provider store={store}>
+      <PersistGate persistor={persistStore(store)}>
         <SessionProvider>
           {children}
         </SessionProvider>
-      // {/* </PersistGate> */}
-    // </Provider>
+      </PersistGate>
+    </Provider>
   );
 }

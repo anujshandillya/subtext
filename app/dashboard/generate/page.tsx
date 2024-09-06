@@ -1,12 +1,15 @@
+'use client'
 import { SideBar } from '@/components/shared/SideBar';
 import UploadButton from '@/components/shared/UploadButton';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 export default function page() {
-    // const router = useRouter();
-    // const { user } = useSelector((state: any) => state);
-    // if(!user) {
-    //   router.replace("/");
-    // }
+    const router = useRouter();
+    const { user } = useSelector((state: any) => state);
+    if(!user) {
+      router.replace("/");
+    }
     return (
         <>
             {/* <NavBar /> */}

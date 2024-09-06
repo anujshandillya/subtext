@@ -25,5 +25,9 @@ export async function POST(req:Request) {
 
     const returnResponse = await awsS3Client.send(uploadData);
     console.log(file);
-    return new Response(JSON.stringify({ message: 'file uploaded', response: returnResponse }), { status: 200 });
+    return new Response(JSON.stringify({ 
+        message: 'file uploaded',
+        fileName: newFile,
+        response: returnResponse 
+    }), { status: 200 });
 }

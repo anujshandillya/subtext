@@ -2,16 +2,21 @@
 import { SideBar } from '@/components/shared/SideBar';
 import UploadButton from '@/components/shared/UploadButton';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Page({ params }: { params: { filename: string } }) {
     const file=params.filename;
-    // const router = useRouter();
-    // const { user } = useSelector((state: any) => state);
-    // if(!user) {
-    //   router.replace("/");
-    // }
+    const router = useRouter();
+    const { user } = useSelector((state: any) => state);
+    if(!user) {
+      router.replace("/");
+    }
     // TO-DO: run request once
+    useEffect(() => {
+        axios.get('/api/gen/video/gettranscription?filename='+file);
+    },[file])
     return (
         <>
             {/* <NavBar /> */}
