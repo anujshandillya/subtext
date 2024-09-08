@@ -70,7 +70,7 @@ export async function GET(req: Request) {
     console.log(transcription);
     if(transcription) {
         return Response.json({
-            status: 'FETCHED',
+            status: 'COMPLETED',
             transcription,
         })
     }
@@ -79,7 +79,6 @@ export async function GET(req: Request) {
     const existingJob = await GetJob(filename);
     if(existingJob) {
         return Response.json({
-            jobName: existingJob.TranscriptionJob?.TranscriptionJobName,
             status: existingJob.TranscriptionJob?.TranscriptionJobStatus
         })
     }
@@ -89,5 +88,7 @@ export async function GET(req: Request) {
 
     const result = await tClient.send(transcriptionCommand);
   
-    return Response.json(result);
+    return Response.json({
+        status: result.TranscriptionJob?.TranscriptionJobStatus
+    });
   }
