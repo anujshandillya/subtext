@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { signIn, signOut, useSession } from "next-auth/react";
 import UserOpt from "./UserOpt";
-import Image from "next/image";
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
-  const session = useSession();
-  console.log(session);
+  const { user } = useSelector((state: any) => state);
   return (
     <>
       <div className="w-full bg-gray-800 text-white mx-auto h-16 px-8 flex justify-between items-center">
@@ -24,12 +22,12 @@ export default function NavBar() {
           <Link className="hover:text-green-300" href="/contact">
             Contact
           </Link>
-          {session.data?.user && (
+          {user && (
             <>
-            <UserOpt userName={session.data.user.name ?? ""} />
+            <UserOpt userName={user?.name ?? ""} />
             </>
           )}
-          {!session.data?.user && (
+          {!user && (
             <>
             <Link href="/auth/login">
               <Button

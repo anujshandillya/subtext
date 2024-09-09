@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,10 +14,13 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { setLogout } from "@/state"
 import { signOut } from "next-auth/react"
 import Image from "next/image"
+import { useDispatch } from "react-redux"
 
 export function DropdownMenuDemo(props: { userName: string }) {
+  const dispatch = useDispatch();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,7 +45,10 @@ export function DropdownMenuDemo(props: { userName: string }) {
         <DropdownMenuItem>GitHub</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem onClick={() => {
+          signOut();
+          dispatch(setLogout());
+        }}>
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -4,6 +4,7 @@ import NavBar from "@/components/shared/NavBar";
 import { Button } from "@/components/ui/button";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const LightningIcon = () => {
   return (
@@ -36,7 +37,7 @@ const LightningIcon = () => {
 };
 
 export default function Home() {
-  const session = useSession();
+  const { user } = useSelector((state: any) => state);
   return (
     <>
       <NavBar />
@@ -58,7 +59,7 @@ export default function Home() {
               audience effortlessly with our cutting-edge AI-powered subtitle
               generator.
             </p>
-            {session.data?.user && (
+            {user && (
               <>
                 <Button
                   className="rounded-lg lg:mt-16 md:mt-12 mt-10"
@@ -70,7 +71,7 @@ export default function Home() {
                 </Button>
               </>
             )}
-            {!session.data?.user && (
+            {!user && (
               <>
                 <Button
                   className="rounded-lg lg:mt-16 md:mt-12 mt-10"

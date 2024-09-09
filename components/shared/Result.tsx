@@ -1,16 +1,26 @@
 // import SparklesIcon from "@/components/SparklesIcon";
-import {transcriptionItemsToSrt} from "@/aws";
+import {awsS3Client, transcriptionItemsToSrt} from "@/aws";
 import {FFmpeg} from "@ffmpeg/ffmpeg";
 import {toBlobURL, fetchFile} from "@ffmpeg/util";
 import {useEffect, useState, useRef} from "react";
 import { Button } from "../ui/button";
+import axios from "axios";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function ResultVideo({filename, transcriptionItems}: {filename: string, transcriptionItems: any[]}) {
+  const router = useRouter()
+  const { user } = useSelector((state: any) => state);
+  if(!user) {
+    router.replace('/')
+  }
   const videoUrl = `https://aws-subtext.s3.amazonaws.com/${filename}`;
   const [loaded, setLoaded] = useState(false);
   const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
   const [outlineColor, setOutlineColor] = useState('#000000');
   const [progress, setProgress] = useState(1);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
   const ffmpegRef = useRef(new FFmpeg());
   const videoRef = useRef<any>(null);
   useEffect(() => {
@@ -19,6 +29,13 @@ export default function ResultVideo({filename, transcriptionItems}: {filename: s
     }
     load();
   }, []);
+
+  const handleUpload = async () => {
+    const res = await axios.postForm('/api/gen/video/uploadOutput', {
+      file: videoFile,
+      userEmail: user.email ?? '' as string,
+    });
+  }
 
   const load = async () => {
     const ffmpeg = ffmpegRef.current;
@@ -64,8 +81,11 @@ export default function ResultVideo({filename, transcriptionItems}: {filename: s
       'output.mp4'
     ]);
     const data = await ffmpeg.readFile('output.mp4');
-    videoRef.current.src =
-      URL.createObjectURL(new Blob([Buffer.from(data)], {type: 'video/mp4'}));
+    const videoBlob=new Blob([Buffer.from(data)], {type: 'video/mp4'})
+    const objURL=URL.createObjectURL(videoBlob);
+    const videoFile = new File([videoBlob], `${filename}-output.mp4`, { type: "video/mp4" });
+    setVideoFile(videoFile)
+    videoRef.current.src = objURL;
     setProgress(1);
   }
 
@@ -90,6 +110,14 @@ export default function ResultVideo({filename, transcriptionItems}: {filename: s
         <input type="color"
                value={outlineColor}
                onChange={ev => setOutlineColor(ev.target.value)}/>
+        {videoFile?
+        (
+          <>
+          <Button onClick={handleUpload}>Save this file</Button>
+          </>
+        ):(
+          ""
+        )}
       </div>
       {/* video */}
       <div className="rounded-xl overflow-hidden relative flex flex-col justify-around w-full items-center text-center">
