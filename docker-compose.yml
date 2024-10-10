@@ -1,0 +1,42 @@
+# services:
+#   postgresdb:
+#     container_name: postgres_db
+#     image: postgres:14-alpine
+#     restart: always
+#     volumes:
+#       - postgres_db:/var/lib/postgresql/data
+#     ports:
+#       - 5439:5432
+#     environment:
+#       - POSTGRES_USER=amananuj
+#       - POSTGRES_PASSWORD=qwertyamananuj
+#       - POSTGRES_DB=postgres
+
+#   next:
+#     env_file:
+#       .env
+#     container_name: next
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - 3000:3000
+#     depends_on:
+#       - postgresdb
+#     develop:
+#       watch:
+#       - path: ./package.json
+#         action: rebuild
+#       - path: ./next.config.mjs
+#         action: rebuild
+#       - path: ./yarn.lock
+#         action: rebuild
+#       - path: .
+#         target: /usr/local/app
+#         action: sync
+#     volumes:
+#       - next:/usr/local/app
+
+# volumes:
+#   next:
+#   postgres_db:

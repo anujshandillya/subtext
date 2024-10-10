@@ -1,16 +1,17 @@
+# build only in production
 FROM node:22.7.0-alpine
 
-WORKDIR /usr/src/subtext
+WORKDIR /usr/local/app
 
 COPY package.json .
 COPY yarn.lock .
-COPY ./prisma .
 
 RUN yarn install
-# build only in production
+COPY . .
+
 RUN npx prisma generate
 
-COPY . .
+# # RUN npx prisma migrate dev --name schema
 
 EXPOSE 3000
 
