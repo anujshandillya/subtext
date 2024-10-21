@@ -41,7 +41,12 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <section className="relative container w-full h-screen mx-auto">
+      <section className="top-16 relative container w-full h-screen mx-auto">
+        <div className="fixed left-0 top-0 -z-10 h-full w-full">
+          <div className="relative h-full w-full bg-white">
+            <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+          </div>
+        </div>
         <div className="absolute inset-0 mx-auto sm:mx-16 px-6 flex flex-row items-start gap-12">
           <div className="">
             <h6 className="font-mono flex text-[#757575] lg:mt-12 mt-4">
@@ -73,13 +78,12 @@ export default function Home() {
             )}
             {!user && (
               <>
-                <Button
-                  className="rounded-lg lg:mt-16 md:mt-12 mt-10"
-                  variant="default"
-                  onClick={() => signIn()}
-                >
-                  <p className="max-w-3xl">Get Started...</p>
-                </Button>
+                <button className="p-[3px] relative lg:mt-16 md:mt-12 mt-10" onClick={() => signIn()}>
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                  <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white text-lg hover:bg-transparent">
+                    Get Started...
+                  </div>
+                </button>
               </>
             )}
             <p className="font-mono max-w-2xl tracking-tighter mt-2">
