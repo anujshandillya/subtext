@@ -1,5 +1,6 @@
 import Link from "next/link";
 import * as React from "react";
+import { ArrowBigDown, FacebookIcon, TwitterIcon, InstagramIcon, LinkedinIcon } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -7,40 +8,40 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo or Brand */}
-          <div className="text-2xl font-bold">SubText</div>
+          <div className="text-3xl font-bold">SubText</div>
 
           {/* Navigation Links */}
-          <ul className="">
+          <ul className="flex gap-10">
             <li>
-              <Link href="/" className="hover:text-green-300">
+              <Link href="/" className="hover:text-[#b169ff]">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/pricing" className="hover:text-green-300">
+              <Link href="/pricing" className="hover:text-[#b169ff] hover:cursor-pointer">
                 Pricing
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-green-300">
+              <Link href="/contact" className="hover:text-[#b169ff]">
                 Contact
               </Link>
             </li>
           </ul>
 
           {/* Social Media Icons */}
-          <div className="">
-            <Link href="#" className="hover:text-gray-400">
-              <i className="fab fa-facebook-f"></i>
+          <div className=" flex gap-4">
+            <Link href="#" className="hover:text-gray-400 hover:cursor-pointer">
+              <FacebookIcon />
             </Link>
-            <Link href="#" className="hover:text-gray-400">
-              <i className="fab fa-twitter"></i>
+            <Link href="#" className="hover:text-gray-400 hover:cursor-pointer">
+              <TwitterIcon />
             </Link>
-            <Link href="#" className="hover:text-gray-400">
-              <i className="fab fa-instagram"></i>
+            <Link href="#" className="hover:text-gray-400 hover:cursor-pointer">
+              <InstagramIcon />
             </Link>
-            <Link href="#" className="hover:text-gray-400">
-              <i className="fab fa-linkedin-in"></i>
+            <Link href="#" className="hover:text-gray-400 hover:cursor-pointer">
+              <LinkedinIcon />
             </Link>
           </div>
         </div>
