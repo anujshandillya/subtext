@@ -61,9 +61,9 @@ export default function Page({ params }: { params: { filename: string } }) {
                         </>
                     ) : (
                         <>
-                            <h1 className="font-mono font-black max-w-4xl bg-gradient-to-r from-[#5269fe] via-[#9990da] to-[#9990da] text-transparent bg-clip-text">
+                            {/* <h1 className="font-mono font-black max-w-4xl bg-gradient-to-r from-[#5269fe] via-[#9990da] to-[#9990da] text-transparent bg-clip-text">
                                 Subtitles Generated for {file}
-                            </h1>
+                            </h1> */}
                             <ResultVideo filename={file} transcriptionItems={awsTranscribe} />
                         </>
                     )}
