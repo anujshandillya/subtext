@@ -1,11 +1,9 @@
-// import SparklesIcon from "@/components/SparklesIcon";
-import { awsS3Client, transcriptionItemsToSrt } from "@/aws";
+import { transcriptionItemsToSrt } from "@/aws";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
 import { useEffect, useState, useRef, Suspense } from "react";
 import { Button } from "../ui/button";
 import axios from "axios";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -132,7 +130,6 @@ export default function ResultVideo({
     <>
     {progress && progress < 1 && (
     <div className="fixed inset-0 bg-opacity-50 flex flex-col h-screen items-center text-center justify-center z-50">
-          {/* <Loader /> */}
           <div className="p-6">
             <Loader />
           </div>
@@ -154,10 +151,6 @@ export default function ResultVideo({
                     onChange={(ev) => setFontSize(Number(ev.target.value))}
                   />
                 </div>
-                {/* <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Font Family</Label>
-                <Input name="fontFamily" placeholder="Font Family" onChange={ev => setFontFamily(ev.target.value)} />
-              </div> */}
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="framework">Margin Vertical</Label>
                   <Input
@@ -187,7 +180,6 @@ export default function ResultVideo({
                     onClick={transcode}
                     className="bg-gradient-to-r from-[#5269fe] via-[#9990da] to-[#9990da] py-2 px-6 rounded-full inline-flex gap-2 border-2 border-purple-700/20 cursor-pointer"
                   >
-                    {/* <SparklesIcon /> */}
                     <span>Apply captions</span>
                   </Button>
                   {videoFile ? (
@@ -207,7 +199,6 @@ export default function ResultVideo({
             </CardContent>
           </Card>
         </div>
-        {/* video */}
         
         <div className={`rounded-xl overflow-hidden relative ${progress && progress < 1 && "blur-lg"} flex flex-col justify-around w-full items-center text-center`}>
           {progress && progress < 1 && (
@@ -226,7 +217,6 @@ export default function ResultVideo({
               </div>
             </div>
           )}
-          {/* <Suspense fallback={<div>Loading...</div>}> */}
           <video
             className="rounded-xl shadow-xl shadow-black"
             width="80%"
@@ -234,7 +224,6 @@ export default function ResultVideo({
             ref={videoRef}
             controls
           ></video>
-          {/* </Suspense> */}
         </div>
       </div>
     </>

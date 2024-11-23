@@ -1,7 +1,5 @@
-import { Inter, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/shared/NavBar";
-import Footer from "@/components/shared/Footer";
 import Providers from "./Providers";
 
 const poppins = Poppins({

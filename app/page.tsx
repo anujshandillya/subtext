@@ -2,7 +2,7 @@
 import Footer from "@/components/shared/Footer";
 import NavBar from "@/components/shared/NavBar";
 import { Button } from "@/components/ui/button";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -67,23 +67,24 @@ export default function Home() {
             {user && (
               <>
                 <Button
-                  className="rounded-lg lg:mt-16 md:mt-12 mt-10"
+                  className="p-[3px] relative lg:mt-16 md:mt-12 mt-10"
                   variant="default"
                 >
-                  <p className="max-w-3xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                  <div className="px-8 py-2 bg-black rounded-[6px]  relative group transition duration-200 text-white text-lg hover:bg-transparent">
                     <Link href="/dashboard">Dashboard</Link>
-                  </p>
+                  </div>
                 </Button>
               </>
             )}
             {!user && (
               <>
-                <button className="p-[3px] relative lg:mt-16 md:mt-12 mt-10" onClick={() => signIn()}>
+                <Button className="p-[3px] relative lg:mt-16 md:mt-12 mt-10" variant="default" onClick={() => signIn()}>
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                  <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white text-lg hover:bg-transparent">
+                  <div className="px-8 py-2 bg-black rounded-[6px]  relative group transition duration-200 text-white text-lg hover:bg-transparent">
                     Get Started...
                   </div>
-                </button>
+                </Button>
               </>
             )}
             <p className="font-mono max-w-2xl tracking-tighter mt-2">

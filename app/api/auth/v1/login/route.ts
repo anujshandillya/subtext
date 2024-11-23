@@ -2,7 +2,6 @@ import { client } from "@/prisma/seed";
 import bcrypt from 'bcryptjs';
 
 export async function POST(req: Request) {
-    // return Response.json('hello')
     const { email, password } = await req.json();
     try {
         const user = await client.user.findFirst({

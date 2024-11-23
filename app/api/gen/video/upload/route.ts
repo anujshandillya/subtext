@@ -5,7 +5,6 @@ import uniqid from 'uniqid'
 export async function POST(req:Request) {
     const formData=await req.formData();
     const file = formData.get('file');
-    // const data = (file instanceof File)?file.arrayBuffer():null;
     let data;
     if(file instanceof File) {
         data = await file.arrayBuffer();
@@ -13,7 +12,6 @@ export async function POST(req:Request) {
     const id = uniqid();
     const extension = file instanceof File ? file.name.split('.').slice(-1)[0] : '.mp4';
     const newFile = id + '.' + extension;
-    // S3Client
     
     const uploadData = new PutObjectCommand({
         Bucket: process.env.S3_BUCKET_NAME ?? '',

@@ -17,6 +17,7 @@ export const authSlice = createSlice({
         setLogout: (state) => {
             state.user = null;
             state.token = null;
+            state.generations = [];
         },
         setGenerations: (state, action) => {
             state.generations = action.payload.generations;

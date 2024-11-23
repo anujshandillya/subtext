@@ -6,17 +6,11 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { setLogout } from "@/state"
 import { signOut } from "next-auth/react"
-import Image from "next/image"
 import { useDispatch } from "react-redux"
 
 export function DropdownMenuDemo(props: { userName: string }) {
@@ -24,7 +18,7 @@ export function DropdownMenuDemo(props: { userName: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <p className="text-green-400 hover:text-green-200 hover:cursor-pointer">{props.userName}</p>
+        <p className="text-blue-700 hover:text-green-200 hover:cursor-pointer">{props.userName}</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel><p className="">{props.userName}</p></DropdownMenuLabel>
@@ -55,7 +49,6 @@ export function DropdownMenuDemo(props: { userName: string }) {
     </DropdownMenu>
   )
 }
-
 
 export default function UserOpt(props: { userName: string }) {
   return (

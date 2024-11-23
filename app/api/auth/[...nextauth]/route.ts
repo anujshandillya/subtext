@@ -1,8 +1,6 @@
 import { client } from "@/prisma/seed";
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import {PrismaAdapter} from '@next-auth/prisma-adapter';
-import { create } from "domain";
 import bcryptjs from 'bcryptjs';
 
 const handler = NextAuth({
@@ -41,7 +39,6 @@ const handler = NextAuth({
             "message": "User already exists",
           })
         }
-        // update user context
       } catch (error) {
         console.error(error);
       }

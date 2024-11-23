@@ -98,12 +98,6 @@ export default function page() {
         <div className="flex justify-around items-center">
         <Button className="rounded-full m-4 hover:bg-green-300 hover:text-black" onClick={()=>{
           signIn();
-          // set redux state
-          // dispatch(setLogin({
-          //   email: session.data!.user!.email,
-          //   name: session.data!.user!.name,
-          //   auth: session!.status==="authenticated"?true:false,
-          // }))
         }}><FcGoogle/></Button>
         </div>
         <span className="flex m-4 justify-around items-center">OR</span>
