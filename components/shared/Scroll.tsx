@@ -12,9 +12,7 @@ export function Scroll() {
   const {user, generations} = useSelector((state: any) => state);
   const getGens = async () => {
     const genData = await axios.post('/api/gen/getGen', {
-      data: {
-        email: user?.email
-      }
+      email: user?.email
     });
     dispatch(setGenerations({
       generations: genData.data
