@@ -13,8 +13,7 @@ export default function NavBar() {
       </Link>
       <nav className="flex gap-10 justify-normal items-center">
         <Link className="font-bold font-mono text-xl" href="/">Home</Link>
-        <Link className="font-bold font-mono text-xl" href="/pricing">Pricing</Link>
-        <Link className="font-bold font-mono text-xl" href="/contact">Contact</Link>
+        <Link className="font-bold font-mono text-xl" href="/dashboard">Dashboard</Link>
         {user && (
           <>
             <UserOpt userName={user?.name ?? ""} />

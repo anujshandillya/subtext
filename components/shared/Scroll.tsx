@@ -3,6 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { setGenerations } from "@/state";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,9 +28,9 @@ export function Scroll() {
         <h4 className="mb-4 text-lg md:text-md sm:text:sm font-medium leading-none">Generations</h4>
         {generations && generations.length > 0 && generations.map((tag: string) => (
           <>
-            <div key={tag} className="text-sm">
+            <Link key={tag} href={`/dashboard/view/${tag}`} className="font-mono font-black max-w-4xl lg:text-[25px] sm:text-[20px] xs:text-[15px] text-[10px] lg:leading-[30px] bg-gradient-to-r from-[#2200ff] via-[#4454ff] to-[#5269fe] text-transparent bg-clip-text">
               {tag}
-            </div>
+            </Link>
             <Separator className="my-2" />
           </>
         ))}

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { setLogout } from "@/state"
 import { signOut } from "next-auth/react"
+import Link from "next/link"
 import { useDispatch } from "react-redux"
 
 export function DropdownMenuDemo(props: { userName: string }) {
@@ -25,19 +26,25 @@ export function DropdownMenuDemo(props: { userName: string }) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            DashBoard
+            <Link className="w-full" href="/dashboard">
+              Dashboard
+            </Link>
           </DropdownMenuItem>
-        </DropdownMenuGroup>
+         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Generations</DropdownMenuItem>
           <DropdownMenuItem>
-            New Generation
+            <Link className="w-full" href="/dashboard/generate">
+              New generation
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>GitHub</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuItem>
+          <a className="w-full" href="https://www.github.com/anujshandillya/subtext">
+            Github
+          </a>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => {
           signOut();
